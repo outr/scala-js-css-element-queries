@@ -20,6 +20,15 @@ jsDependencies += "org.webjars.bower" % "css-element-queries" % CSSElementQuerie
 
 jsDependencies += "org.webjars.bower" % "css-element-queries" % CSSElementQueriesVersion / s"css-element-queries/$CSSElementQueriesVersion/src/ResizeSensor.js"
 
+publishTo <<= version {
+  (v: String) =>
+    val nexus = "https://oss.sonatype.org/"
+    if (v.trim.endsWith("SNAPSHOT"))
+      Some("snapshots" at nexus + "content/repositories/snapshots")
+    else
+      Some("releases" at nexus + "service/local/staging/deploy/maven2")
+}
+
 pomExtra :=
   <url>https://github.com/outr/scala-js-css-element-queries</url>
   <licenses>
